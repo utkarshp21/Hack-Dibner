@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Vibration
-} from 'react-native';
+
 import {
   Button
 } from 'react-native';
@@ -18,34 +16,86 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
+import io from 'socket.io-client';
+
+import {
+  Vibration
+} from 'react-native';
+
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
- 
+
+  constructor(){
+    
+    super()
+    this.state = {
+      vibration_command: {
+        "direction": "Hi Please Select Destination",
+        "seq": [],
+      }
+    };
+  }
+
+  componentDidMount() {
+    const socket = io('http://192.168.1.10:4000');
+    socket.on('vib', (message) => {
+      this.setState({
+        vibration_command: message
+      });
+      this.onVibrateInstruction()
+    });
+  }
+
+  onVibrateInstruction = () => {
+     Vibration.vibrate(this.state.vibration_command["seq"]);
+    };
+
+  selectDirectionImage = (direction) =>{
+    if(direction == "straight"){
+        return require('./../assets/images/up.png')
+    }else if(direction == "back"){
+        return require('./../assets/images/down.png')
+    }
+    else if (direction == "left"){
+        return require('./../assets/images/left.png')
+    }else{
+        return require('./../assets/images/right.png')
+    }
+  }
+
+  
+
   render() {
      
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
+            
+            <Image
+              style={{width: 250, height: 250, marginTop:100}}
+              source={this.selectDirectionImage(this.state.vibration_command.direction)}
+            />
+                        
+            <Text style={{ marginTop: 10, padding: 10, fontSize:50, color:"#e55120"}}>{this.state.vibration_command.direction}</Text>
+            
             <Button
-              onPress={this.onPressLearnMore}
-              title="SHAKE"
-              color="#841584"
+              style={{ marginTop: 10, padding: 50,fontSize:50}}
+              onPress={this.onVibrateInstruction}
+              title="Repeat Instruction"
+              color = "#841584"
               accessibilityLabel="Learn more about this purple button"
             />
-          </View>
-                    
+            
+
+          </View>   
         </ScrollView>
-        
       </View>
     );
   }
-  onPressLearnMore = () => {
-    Vibration.vibrate(10000)
-  };
-
+  
   _maybeRenderDevelopmentModeWarning() {
     if (__DEV__) {
       const learnMoreButton = (
