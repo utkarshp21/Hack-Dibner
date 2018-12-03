@@ -8,9 +8,9 @@ app.get('/', function(req, res){
 
 io.on('connection', (socket) => {
 	console.log('Connected');
-	socket.emit('vib', 'Testing 1 2 3' );
+	socket.emit('vib', {direction:"down",seq:[1000]} );
 })
 
 http.listen(4000, function(){
-  console.log('listening on *:3000');
+  console.log('listening on *:4000');
 });

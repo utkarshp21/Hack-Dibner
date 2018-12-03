@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><%= title %></title>
+		<link rel='stylesheet' href='/stylesheets/style.css' />
+		<script
+		src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
+		<script>
+			const send = function(msg){
+				let posting = $.post("http://localhost:4000/send",{msg});
+				
+				posting.done((data) => {
+					console.log(data);
+				})
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="up"><button onclick="send('u')">Up</button></div>
+			<div class="right"><button onclick="send('r')">Right</button></div>
+			<div class="left"><button onclick="send('l')">Left</button></div>
+			<div class="down"><button onclick="send('d')">Down</button></div>
+		</div>
+	</body>
+</html>
