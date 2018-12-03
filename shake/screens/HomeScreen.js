@@ -13,16 +13,34 @@ import {
   Text,
   TouchableOpacity,
   View,
+  DeviceEventEmitter
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
+
+import Kontakt from 'react-native-kontaktio';
+// const { connect, startScanning } = Kontakt;
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
  
+  componentDidMount() {
+    // connect()
+    //   .then(() => startScanning())
+    //   .catch(error => console.log('error', error));
+
+    // DeviceEventEmitter.addListener(
+    //   'beaconsDidUpdate',
+    //   ({ beacons, region }) => {
+    //     console.log('beaconsDidUpdate', beacons, region);
+    //   },
+    // );
+    console.log(Kontakt);
+  }
+
   render() {
      
     return (
@@ -30,7 +48,7 @@ export default class HomeScreen extends React.Component {
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
             <Button
-              onPress={this.onPressLearnMore}
+              onClick={this.onPressLearnMore}
               title="SHAKE"
               color="#841584"
               accessibilityLabel="Learn more about this purple button"
