@@ -17,22 +17,16 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
-<<<<<<< HEAD
 import io from 'socket.io-client';
 
 import {
   Vibration
 } from 'react-native';
-=======
-import Kontakt from 'react-native-kontaktio';
-// const { connect, startScanning } = Kontakt;
->>>>>>> e48b232023aa65d3fb02eabdba9bb9535ce179ef
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
-<<<<<<< HEAD
 
   constructor(){
     
@@ -74,23 +68,6 @@ export default class HomeScreen extends React.Component {
 
   
 
-=======
- 
-  componentDidMount() {
-    // connect()
-    //   .then(() => startScanning())
-    //   .catch(error => console.log('error', error));
-
-    // DeviceEventEmitter.addListener(
-    //   'beaconsDidUpdate',
-    //   ({ beacons, region }) => {
-    //     console.log('beaconsDidUpdate', beacons, region);
-    //   },
-    // );
-    console.log(Kontakt);
-  }
-
->>>>>>> e48b232023aa65d3fb02eabdba9bb9535ce179ef
   render() {
      
     return (
@@ -106,16 +83,10 @@ export default class HomeScreen extends React.Component {
             <Text style={{ marginTop: 10, padding: 10, fontSize:50, color:"#e55120"}}>{this.state.vibration_command.direction}</Text>
             
             <Button
-<<<<<<< HEAD
               style={{ marginTop: 10, padding: 50,fontSize:50}}
               onPress={this.onVibrateInstruction}
               title="Repeat Instruction"
               color = "#841584"
-=======
-              onClick={this.onPressLearnMore}
-              title="SHAKE"
-              color="#841584"
->>>>>>> e48b232023aa65d3fb02eabdba9bb9535ce179ef
               accessibilityLabel="Learn more about this purple button"
             />
             
